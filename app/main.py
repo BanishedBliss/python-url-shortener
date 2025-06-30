@@ -5,13 +5,10 @@ from app.config import settings
 from .database import init_db, create_tables, shutdown_db
 from .endpoints import router
 
-# Конфигурация
-DATABASE_URL = "sqlite+aiosqlite:///./test.db"
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Инициализация БД
-    init_db(DATABASE_URL)
+    init_db(settings.DATABASE_URL)
     await create_tables()
     yield
     # Очистка
